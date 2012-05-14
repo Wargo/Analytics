@@ -62,6 +62,7 @@ $(document).ready(function() {
 					$(this).addClass('green');
 					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
 				}
+				//$(this).attr('title', $(this).text() - $(this).attr('var'));
 			}
 		}
 	});
