@@ -11,14 +11,9 @@ function debug($array) {
 }
 
 function to_time($seconds) {
-	if ($seconds > 60) {
-		$mins = floor($seconds / 60);
-		$sec = ($seconds / 60) - floor($seconds / 60);
-		$sec = $sec * 60;
-		return $mins . ':' . zerofill(number_format($sec, 0));
-	} else {
-		return '0:' . number_format($seconds, 0);
-	}
+	$mins = floor($seconds / 60.0);
+	$sec = $seconds % 60.0;
+	return $mins . ':' . zerofill(number_format($sec, 0));
 }
 
 function zerofill($num) {
