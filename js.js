@@ -47,9 +47,17 @@ $(document).ready(function() {
 
 		if ($(this).attr('var')) {
 			if ($(this).attr('var') > $(this).text()) {
-				$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+				if ($(this).hasClass('inverse')) { // Para % de rebote
+					$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+				} else {
+					$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+				}
 			} else {
-				$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+				if ($(this).hasClass('inverse')) { // Para % de rebote
+					$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+				} else {
+					$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+				}
 			}
 		}
 	});

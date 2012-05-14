@@ -130,7 +130,7 @@ echo '
 					}
 				}
 				echo '<td var="' . ($comparing?to_time($_ga->getAvgTimeOnSite()):'') . '">' . to_time($ga->getAvgTimeOnSite()) . '</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getVisitBounceRate(), 0, ',', '.'):'') . '">' . number_format($ga->getVisitBounceRate(), 2, '.', '') . ' %</td>';
+				echo '<td class="inverse" var="' . ($comparing?number_format($_ga->getVisitBounceRate(), 0, ',', '.'):'') . '">' . number_format($ga->getVisitBounceRate(), 2, '.', '') . ' %</td>';
 				echo '<td var="' . ($comparing?number_format($_ga->getUniquePageviews(), 0, ',', '.'):'') . '">' . number_format($ga->getUniquePageviews(), 0, '.', '') . '</td>';
 				echo '<td var="' . ($comparing?number_format($_ga->getNewVisits(), 0, ',', '.'):'') . '">' . number_format($ga->getNewVisits(), 0, '.', '') . '</td>';
 			echo '</tr>';
@@ -142,9 +142,9 @@ echo '
 			echo '<td var="' . ($comparing?number_format($_total_visits, 0, ',', '.'):'') . '">' . number_format($total_visits, 0, '.', '') . '</td>';
 			echo '<td var="' . ($comparing?number_format($_total_visitors, 0, ',', '.'):'') . '">' . number_format($total_visitors, 0, '.', '') . '</td>';
 			echo '<td var="' . ($comparing?number_format($_total_page_views, 0, ',', '.'):'') . '">' . number_format($total_page_views, 0, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_page_per_visit, 0, ',', '.'):'') . '">' . number_format($total_page_per_visit / $total, 2, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_time, 0, ',', '.'):'') . '">' . to_time($total_time / $total) . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_bounce, 0, ',', '.'):'') . '">' . number_format($total_bounce / $total, 2, '.', '') . ' %</td>';
+			echo '<td var="' . ($comparing?number_format($_total_page_per_visit / $total, 0, ',', '.'):'') . '">' . number_format($total_page_per_visit / $total, 2, '.', '') . '</td>';
+			echo '<td var="' . ($comparing?number_format($_total_time / $total, 0, ',', '.'):'') . '">' . to_time($total_time / $total) . '</td>';
+			echo '<td class="inverse" var="' . ($comparing?number_format($_total_bounce / $total, 0, ',', '.'):'') . '">' . number_format($total_bounce / $total, 2, '.', '') . ' %</td>';
 			echo '<td var="' . ($comparing?number_format($_total_unique_page_views, 0, ',', '.'):'') . '">' . number_format($total_unique_page_views, 0, '.', '') . '</td>';
 			echo '<td var="' . ($comparing?number_format($_total_new_visits, 0, ',', '.'):'') . '">' . number_format($total_new_visits, 0, '.', '') . '</td>';
 		echo '</tr>';
