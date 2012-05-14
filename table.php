@@ -112,13 +112,21 @@ echo '
 					if ($comparing && $_ga->getVisits()) {
 						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
 					} else {
-						echo '<td var="0">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+						if ($comparing) {
+							echo '<td var="0">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+						} else {
+							echo '<td>' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+						}
 					}
 				} else {
 					if ($comparing && $_ga->getVisits()) {
 						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">0</td>';
 					} else {
-						echo '<td var="0">0</td>';
+						if ($comparing) {
+							echo '<td var="0">0</td>';
+						} else {
+							echo '<td>0</td>';
+						}
 					}
 				}
 				echo '<td var="' . ($comparing?to_time($_ga->getAvgTimeOnSite()):'') . '">' . to_time($ga->getAvgTimeOnSite()) . '</td>';
