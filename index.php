@@ -2,9 +2,9 @@
 session_start();
 include 'conf.php';
 require 'gapi.class.php';
-if (!empty($_POST['user']) && !empty($_POST['pass'])) {
-	$_SESSION['user'] = $_POST['user'];
-	$_SESSION['pass'] = $_POST['pass'];
+if (!empty($_POST['google_email']) && !empty($_POST['google_password'])) {
+	$_SESSION['user'] = $_POST['google_email'];
+	$_SESSION['pass'] = $_POST['google_password'];
 }
 if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 	$ga = new gapi($_SESSION['user'], $_SESSION['pass']);
