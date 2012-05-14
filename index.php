@@ -32,7 +32,7 @@ $ga = new gapi(ga_email,ga_password);
 					foreach($profiles_id as $profile_id) {
 						echo '<input type="hidden" name="profile_id[]" value="' . $profile_id. '" />';
 					}
-					echo '<input type="submit" class="btn btn-primary" value="Calcular" />
+					echo ' <input type="submit" class="btn btn-primary" value="Calcular" />
 				</form>
 			</div>
 			';
