@@ -109,13 +109,13 @@ echo '
 				echo '<td var="' . ($comparing?number_format($_ga->getVisitors(), 0, ',', '.'):'') . '">' . number_format($ga->getVisitors(), 0, '.', '') . '</td>';
 				echo '<td var="' . ($comparing?number_format($_ga->getPageviews(), 0, ',', '.'):'') . '">' . number_format($ga->getPageviews(), 0, '.', '') . '</td>';
 				if ($ga->getVisits()) {
-					if ($_ga->getVisits()) {
+					if ($comparing && $_ga->getVisits()) {
 						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
 					} else {
 						echo '<td var="0">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
 					}
 				} else {
-					if ($_ga->getVisits()) {
+					if ($comparing && $_ga->getVisits()) {
 						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">0</td>';
 					} else {
 						echo '<td var="0">0</td>';
