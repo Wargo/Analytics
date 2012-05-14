@@ -8,6 +8,8 @@ if (!empty($_POST['google_email']) && !empty($_POST['google_password'])) {
 }
 if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 	$ga = new gapi($_SESSION['user'], $_SESSION['pass']);
+} else {
+	$_POST['profile_id'] = null;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

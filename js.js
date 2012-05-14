@@ -48,15 +48,19 @@ $(document).ready(function() {
 		if ($(this).attr('var')) {
 			if ($(this).attr('var') > $(this).text()) {
 				if ($(this).hasClass('inverse')) { // Para % de rebote
-					$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+					$(this).addClass('green');
+					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
 				} else {
-					$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+					$(this).addClass('red');
+					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
 				}
 			} else {
 				if ($(this).hasClass('inverse')) { // Para % de rebote
-					$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+					$(this).addClass('red');
+					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
 				} else {
-					$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+					$(this).addClass('green');
+					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
 				}
 			}
 		}
