@@ -36,12 +36,12 @@ $(document).ready(function() {
 		}
 	});
 
-	$('table.table').tablesorter();
+	$('table.table').tablesorter({sortList: [[1,1]]});
 
 	$.each($('td'), function() {
 		if ($(this).text() >= 1000) {
 			$(this).text($(this).text().replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.'));
-		} else {
+		} else if($(this).text() < 1000) { // Al menos sea número
 			$(this).text($(this).text().replace('.', ','));
 		}
 	});
