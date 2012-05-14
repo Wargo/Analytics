@@ -12,7 +12,7 @@ echo '
 	</form>
 </div>
 ';
-echo '<a class="pull-left btn btn-inverse" href="/">Volver</a>';
+echo '<a class="pull-left btn btn-inverse" href="javascript:history.go(-1);">Volver</a>';
 echo '
 <table class="table">
 	<thead>
