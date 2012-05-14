@@ -4,8 +4,7 @@ ini_set('display_errors', 1);
 
 setlocale(LC_ALL, 'es_ES.UTF8');
 
-define('ga_email','guillermo@artvisual.net');
-define('ga_password','will2805');
+include 'access.php';
 
 function debug($array) {
 	echo '<pre>';
