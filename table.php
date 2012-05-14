@@ -23,7 +23,7 @@ echo '
 	</form>
 </div>
 ';
-echo '<a class="pull-left btn btn-inverse" href="javascript:history.go(-1);">Volver</a>';
+echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 echo '
 <table class="table">
 	<thead>
