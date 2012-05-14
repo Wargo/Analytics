@@ -4,8 +4,6 @@ ini_set('display_errors', 1);
 
 setlocale(LC_ALL, 'es_ES.UTF8');
 
-include 'access.php';
-
 function debug($array) {
 	echo '<pre>';
 	print_r($array);
