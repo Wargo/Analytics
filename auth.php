@@ -5,14 +5,14 @@
 			<div class="control-group">
 				<label class="control-label" for="input01">Email</label>
 				<div class="controls">
-					<input type="text" class="input-xlarge" name="user" id="input01">
+					<input type="text" class="input-xlarge" name="user" id="input01" placeholder="Email">
 					<p class="help-block">Con el que accedes a Google Analytics</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="input02">Contraseña</label>
 				<div class="controls">
-					<input type="password" class="input-xlarge" name="pass" id="input02">
+					<input type="password" class="input-xlarge" name="pass" id="input02" placeholder="Contraseña">
 					<p class="help-block">No te preocupes, no será almacenada</p>
 				</div>
 			</div>

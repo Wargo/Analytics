@@ -29,7 +29,28 @@ if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 			$date_start = $_POST['date_start'];
 			$date_end = $_POST['date_end'];
 			$profiles_id = $_POST['profile_id'];
-			include 'table.php';
+			if (!empty($_POST['queryType'])) {
+				$queryType = $_POST['queryType'];
+			} else {
+				$queryType = 1;
+			}
+			if (!empty($_POST['date_start_comp'])) {
+				$date_start_comp = $_POST['date_start_comp'];
+				$date_end_comp = $_POST['date_end_comp'];
+				$comparing = true;
+			} else {
+				$date_start_comp = $date_start;
+				$date_end_comp = $date_end;
+				$comparing = false;
+			}
+			switch ($queryType) {
+				case 1:
+					include 'table.php';
+					break;
+				case 2:
+					include 'table2.php';
+					break;
+			}
 		} else {
 			if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 				include 'list.php';

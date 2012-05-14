@@ -8,11 +8,11 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#dp1, #dp2').datepicker({
+	$('#dp1, #dp2, #dp3, #dp4').datepicker({
 		format: 'yyyy-mm-dd',
 		weekStart: 1
 	}).on('changeDate', function() {
-		$('#dp1, #dp2').datepicker('hide');
+		$('#dp1, #dp2, #dp3, #dp4').datepicker('hide');
 	});
 
 	$('.remove_checks').click(function() {
@@ -44,6 +44,14 @@ $(document).ready(function() {
 		} else if($(this).text() < 1000) { // Al menos sea número
 			$(this).text($(this).text().replace('.', ','));
 		}
+
+		if ($(this).attr('var')) {
+			if ($(this).attr('var') > $(this).text()) {
+				$(this).append(' <pan class="red">(' + $(this).attr('var') + ')</span>');
+			} else {
+				$(this).append(' <pan class="green">(' + $(this).attr('var') + ')</span>');
+			}
+		}
 	});
 
 	$('.more-less').click(function() {
@@ -59,6 +67,20 @@ $(document).ready(function() {
 	$('.change-date').click(function() {
 		$(this).remove();
 		$('.new_form').removeClass('hidden');
+	});
+
+	$('.queryType').change(function() {
+		if ($(this).val() == 2) {
+			$('.more_options').show();
+		} else {
+			$('.more_options').hide();
+		}
+	});
+
+	$('.compare').click(function() {
+		$(this).remove();
+		$('.compare_fields').show();
+		return false;
 	});
 
 });

@@ -94,3 +94,11 @@ div.login {
 	margin: 200px auto;
 	width: 500px;
 }
+
+.red {
+	color: #FF0000;
+}
+
+.green {
+	color: #00FF00;
+}
