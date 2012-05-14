@@ -11,7 +11,7 @@ function debug($array) {
 }
 
 function to_time($seconds) {
-	if ($seconds >= 60) {
+	if ($seconds > 60) {
 		$mins = floor($seconds / 60);
 		$sec = ($seconds / 60) - floor($seconds / 60);
 		$sec = $sec * 60;
