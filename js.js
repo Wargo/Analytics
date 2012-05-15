@@ -39,13 +39,12 @@ $(document).ready(function() {
 	$('table.table').tablesorter({sortList: [[1,1]]});
 
 	$.each($('td'), function() {
+		var current_value = parseFloat($(this).text());
 		if (!$(this).hasClass('is_time')) {
 			$(this).text(format($(this).text()));
 		}
 
 		if ($(this).attr('var')) {
-			var current_value = parseFloat($(this).text());
-
 			if (!$(this).hasClass('is_time')) {
 				var new_value = format(parseFloat($(this).attr('var')));
 
