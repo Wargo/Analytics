@@ -14,6 +14,7 @@ echo '
 			<input type="text" name="date_end_comp" class="input-small" id="dp4" value="' . $date_end_comp . '" />
 			-&nbsp;
 		</div>
+		<input type="hidden" name="queryType" value="' . $queryType . '" />
 		<input type="text" name="date_start" class="input-small" id="dp1" value="' . $date_start . '" />
 		<input type="text" name="date_end" class="input-small" id="dp2" value="' . $date_end . '" />';
 		foreach($profiles_id as $profile_id) {
@@ -105,22 +106,22 @@ echo '
 
 			echo '<tr>';
 				echo '<td class="first">' . $_SESSION['accounts'][$profile_id] . '</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getVisits(), 0, ',', '.'):'') . '">' . number_format($ga->getVisits(), 0, '.', '') . '</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getVisitors(), 0, ',', '.'):'') . '">' . number_format($ga->getVisitors(), 0, '.', '') . '</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getPageviews(), 0, ',', '.'):'') . '">' . number_format($ga->getPageviews(), 0, '.', '') . '</td>';
+				echo '<td var="' . ($comparing?$_ga->getVisits():'') . '">' . $ga->getVisits() . '</td>';
+				echo '<td var="' . ($comparing?$_ga->getVisitors():'') . '">' . $ga->getVisitors() . '</td>';
+				echo '<td var="' . ($comparing?$_ga->getPageviews():'') . '">' . $ga->getPageviews() . '</td>';
 				if ($ga->getVisits()) {
 					if ($comparing && $_ga->getVisits()) {
-						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2):'') . '">' . number_format($ga->getPageviews() / $ga->getVisits(), 2) . '</td>';
 					} else {
 						if ($comparing) {
-							echo '<td var="0">' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+							echo '<td var="0">' . number_format($ga->getPageviews() / $ga->getVisits(), 2) . '</td>';
 						} else {
-							echo '<td>' . number_format($ga->getPageviews() / $ga->getVisits(), 2, '.', '') . '</td>';
+							echo '<td>' . number_format($ga->getPageviews() / $ga->getVisits(), 2) . '</td>';
 						}
 					}
 				} else {
 					if ($comparing && $_ga->getVisits()) {
-						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2, ',', '.'):'') . '">0</td>';
+						echo '<td var="' . ($comparing?number_format($_ga->getPageviews() / $_ga->getVisits(), 2):'') . '">0</td>';
 					} else {
 						if ($comparing) {
 							echo '<td var="0">0</td>';
@@ -129,24 +130,24 @@ echo '
 						}
 					}
 				}
-				echo '<td var="' . ($comparing?to_time($_ga->getAvgTimeOnSite()):'') . '">' . to_time($ga->getAvgTimeOnSite()) . '</td>';
-				echo '<td class="inverse" var="' . ($comparing?number_format($_ga->getVisitBounceRate(), 2, ',', '.'):'') . '">' . number_format($ga->getVisitBounceRate(), 2, '.', '') . ' %</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getUniquePageviews(), 0, ',', '.'):'') . '">' . number_format($ga->getUniquePageviews(), 0, '.', '') . '</td>';
-				echo '<td var="' . ($comparing?number_format($_ga->getNewVisits(), 0, ',', '.'):'') . '">' . number_format($ga->getNewVisits(), 0, '.', '') . '</td>';
+				echo '<td class="is_time" var="' . ($comparing?to_time($_ga->getAvgTimeOnSite()):'') . '" title="' . ($comparing?diff($ga->getAvgTimeOnSite(), $_ga->getAvgTimeOnSite()):'') . '">' . to_time($ga->getAvgTimeOnSite()) . '</td>';
+				echo '<td class="inverse" var="' . ($comparing?number_format($_ga->getVisitBounceRate(), 2):'') . '">' . number_format($ga->getVisitBounceRate(), 2) . ' %</td>';
+				echo '<td var="' . ($comparing?$_ga->getUniquePageviews():'') . '">' . $ga->getUniquePageviews() . '</td>';
+				echo '<td var="' . ($comparing?$_ga->getNewVisits():'') . '">' . $ga->getNewVisits() . '</td>';
 			echo '</tr>';
 		}
 	echo '</tbody>';
 	echo '<tfoot>';
 		echo '<tr class="total">';
 			echo '<td class="first">TOTAL / MEDIA</td>';
-			echo '<td var="' . ($comparing?number_format($_total_visits, 0, '.', ','):'') . '">' . number_format($total_visits, 0, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_visitors, 0, '.', ','):'') . '">' . number_format($total_visitors, 0, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_page_views, 0, '.', ','):'') . '">' . number_format($total_page_views, 0, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_page_per_visit / $total, 2, ',', '.'):'') . '">' . number_format($total_page_per_visit / $total, 2, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?to_time($_total_time / $total):'') . '">' . to_time($total_time / $total) . '</td>';
-			echo '<td class="inverse" var="' . ($comparing?number_format($_total_bounce / $total, 2, ',', '.'):'') . '">' . number_format($total_bounce / $total, 2, '.', '') . ' %</td>';
-			echo '<td var="' . ($comparing?number_format($_total_unique_page_views, 0, '.', ','):'') . '">' . number_format($total_unique_page_views, 0, '.', '') . '</td>';
-			echo '<td var="' . ($comparing?number_format($_total_new_visits, 0, '.', ','):'') . '">' . number_format($total_new_visits, 0, '.', '') . '</td>';
+			echo '<td var="' . ($comparing?$_total_visits:'') . '">' . $total_visits . '</td>';
+			echo '<td var="' . ($comparing?$_total_visitors:'') . '">' . $total_visitors . '</td>';
+			echo '<td var="' . ($comparing?$_total_page_views:'') . '">' . $total_page_views . '</td>';
+			echo '<td var="' . ($comparing?number_format($_total_page_per_visit / $total, 2):'') . '">' . number_format($total_page_per_visit / $total, 2) . '</td>';
+			echo '<td class="is_time" var="' . ($comparing?to_time($_total_time / $total):'') . '" title="' . ($comparing?diff($total_time, $_total_time, $total):'') . '">' . to_time($total_time / $total) . '</td>';
+			echo '<td class="inverse" var="' . ($comparing?number_format($_total_bounce / $total, 2):'') . '">' . number_format($total_bounce / $total, 2) . ' %</td>';
+			echo '<td var="' . ($comparing?$_total_unique_page_views:'') . '">' . $total_unique_page_views . '</td>';
+			echo '<td var="' . ($comparing?$_total_new_visits:'') . '">' . $total_new_visits . '</td>';
 		echo '</tr>';
 	echo '</tfoot>';
 echo '</table>';

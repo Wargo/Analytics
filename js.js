@@ -39,30 +39,45 @@ $(document).ready(function() {
 	$('table.table').tablesorter({sortList: [[1,1]]});
 
 	$.each($('td'), function() {
-		if ($(this).text() >= 1000) {
-			$(this).text($(this).text().replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.'));
-		} else if($(this).text() < 1000) { // Al menos sea número
-			$(this).text($(this).text().replace('.', ','));
-		}
-
 		if ($(this).attr('var')) {
-			if ($(this).attr('var') > $(this).text()) {
-				if ($(this).hasClass('inverse')) { // Para % de rebote
-					$(this).addClass('green');
-					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
+			var current_value = parseFloat($(this).text());
+
+			if (!$(this).hasClass('is_time')) {
+
+				var new_value = format(parseFloat($(this).attr('var')));
+				$(this).text(format($(this).text()));
+
+				if (parseFloat($(this).attr('var')) > current_value) {
+					if ($(this).hasClass('inverse')) { // Para % de rebote
+						$(this).addClass('green');
+					} else {
+						$(this).addClass('red');
+					}
 				} else {
-					$(this).addClass('red');
-					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
+					if ($(this).hasClass('inverse')) { // Para % de rebote
+						$(this).addClass('red');
+					} else {
+						$(this).addClass('green');
+					}
+				}
+				$(this).append(' <span>(' + new_value + ')</span>');
+
+				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
+
+				if (num >= 0) {
+					$(this).attr('title', '+' + format(num));
+				} else {
+					$(this).attr('title', format(num));
 				}
 			} else {
-				if ($(this).hasClass('inverse')) { // Para % de rebote
-					$(this).addClass('red');
-					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
-				} else {
+				var new_value = $(this).attr('var');
+
+				if ($(this).attr('title') >= 0) {
 					$(this).addClass('green');
-					$(this).append(' <span>(' + $(this).attr('var') + ')</span>');
+				} else {
+					$(this).addClass('red');
 				}
-				//$(this).attr('title', $(this).text() - $(this).attr('var'));
+				$(this).append(' <span>(' + new_value + ')</span>');
 			}
 		}
 	});
@@ -97,3 +112,13 @@ $(document).ready(function() {
 	});
 
 });
+
+function format(s) {
+	s = s.toString();
+	s = s.replace('.', ',');
+	//tsep = '.';
+	//dsep = ',';
+	//var rx = new RegExp("^(\\d{1,3}(\\"+tsep+"\\d{3})*(\\"+dsep+"\\d+)?|(\\d+))(\\"+dsep+"\\d+)?$");
+	//return rx.test(s.replace(/(^\s*|\s*$/,""));
+	return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
+}

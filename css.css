@@ -104,7 +104,7 @@ td span {
 	color: #FF0000;
 	*/
 	background: url(images/down.png) no-repeat 3px 8px #FFE2E2;
-	padding-left: 5px;
+	padding-left: 20px !important;
 }
 
 .green {

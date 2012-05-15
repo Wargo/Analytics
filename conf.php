@@ -23,3 +23,17 @@ function zerofill($num) {
 		return $num;
 	}
 }
+
+function diff($total_time, $_total_time, $total = 0) {
+	if ($total) {
+		$diff = to_time(abs($total_time/$total - $_total_time/$total));
+	} else {
+		$diff = to_time(abs($total_time - $_total_time));
+	}
+	if ($total_time >= $_total_time) {
+		$symbol = '+';
+	} else {
+		$symbol = '-';
+	}
+	return $symbol . $diff;
+}
