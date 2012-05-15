@@ -55,7 +55,7 @@ $(document).ready(function() {
 					} else {
 						$(this).addClass('red');
 					}
-					$(this).attr('title', format(num));
+					$(this).attr('title', '-' + format(Math.abs(num)));
 				} else {
 					if ($(this).hasClass('inverse')) { // Para % de rebote
 						$(this).addClass('red');
