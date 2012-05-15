@@ -115,11 +115,15 @@ $(document).ready(function() {
 });
 
 function format(s) {
-	s = s.toString();
-	s = s.replace('.', ',');
-	//tsep = '.';
-	//dsep = ',';
-	//var rx = new RegExp("^(\\d{1,3}(\\"+tsep+"\\d{3})*(\\"+dsep+"\\d+)?|(\\d+))(\\"+dsep+"\\d+)?$");
-	//return rx.test(s.replace(/(^\s*|\s*$/,""));
-	return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
+	if (strpos(s, 'w') !== 0) {
+		s = s.toString();
+		s = s.replace('.', ',');
+		return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
+	} else {
+		return s;
+	}
+}
+function strpos (haystack, needle, offset) {
+	var i = (haystack + '').indexOf(needle, (offset || 0));
+	return i === -1 ? false : i;
 }
