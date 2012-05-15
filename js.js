@@ -47,6 +47,7 @@ $(document).ready(function() {
 		if ($(this).attr('var')) {
 			if (!$(this).hasClass('is_time')) {
 				var new_value = format(parseFloat($(this).attr('var')));
+				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
 
 				if (parseFloat($(this).attr('var')) > current_value) {
 					if ($(this).hasClass('inverse')) { // Para % de rebote
@@ -54,29 +55,23 @@ $(document).ready(function() {
 					} else {
 						$(this).addClass('red');
 					}
+					$(this).attr('title', format(num));
 				} else {
 					if ($(this).hasClass('inverse')) { // Para % de rebote
 						$(this).addClass('red');
 					} else {
 						$(this).addClass('green');
 					}
+					$(this).attr('title', '+' + format(num));
 				}
 				$(this).append(' <span>(' + new_value + ')</span>');
-
-				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
-
-				if (num >= 0) {
-					$(this).attr('title', '+' + format(num));
-				} else {
-					$(this).attr('title', format(num));
-				}
 			} else {
 				var new_value = $(this).attr('var');
 
-				if ($(this).attr('title') >= 0) {
-					$(this).addClass('green');
-				} else {
+				if (strpos($(this).attr('title'), '-') === 0) {
 					$(this).addClass('red');
+				} else {
+					$(this).addClass('green');
 				}
 				$(this).append(' <span>(' + new_value + ')</span>');
 			}
