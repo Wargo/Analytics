@@ -103,7 +103,7 @@ td span {
 	/*
 	color: #FF0000;
 	*/
-	background: url(images/down.png) no-repeat 3px 8px #FFE2E2;
+	background: url(images/down.png) no-repeat 3px 8px #FFE8E8;
 	padding-left: 20px !important;
 }
 
@@ -111,6 +111,6 @@ td span {
 	/*
 	color: #00FF00;
 	*/
-	background: url(images/up.png) no-repeat 3px 8px #E2FFE2;
+	background: url(images/up.png) no-repeat 3px 8px #E8FFE8;
 	padding-left: 20px !important;
 }
