@@ -39,13 +39,15 @@ $(document).ready(function() {
 	$('table.table').tablesorter({sortList: [[1,1]]});
 
 	$.each($('td'), function() {
+		if (!$(this).hasClass('is_time')) {
+			$(this).text(format($(this).text()));
+		}
+
 		if ($(this).attr('var')) {
 			var current_value = parseFloat($(this).text());
 
 			if (!$(this).hasClass('is_time')) {
-
 				var new_value = format(parseFloat($(this).attr('var')));
-				$(this).text(format($(this).text()));
 
 				if (parseFloat($(this).attr('var')) > current_value) {
 					if ($(this).hasClass('inverse')) { // Para % de rebote
