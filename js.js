@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 	$.each($('td'), function() {
 		var current_value = parseFloat($(this).text());
-		if (!$(this).hasClass('is_time')) {
+		if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
 			$(this).text(format($(this).text()));
 		}
 
@@ -107,16 +107,29 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.country').click(function() {
+		var element = this;
+		$(this).append(' <img width="16" class="preloader" src="images/preloader.gif" />');
+		$.get(this.href, function(data) {
+			$('.preloader').remove();
+			$(element).closest('tr').after(data);
+			delete_countries();
+		});
+		return false;
+	});
+
 });
 
+function delete_countries() {
+	$('.header').click(function() {
+		$('.countries').remove();
+	});
+}
+
 function format(s) {
-	if (strpos(s, 'w') !== 0) {
-		s = s.toString();
-		s = s.replace('.', ',');
-		return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
-	} else {
-		return s;
-	}
+	s = s.toString();
+	s = s.replace('.', ',');
+	return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
 }
 function strpos (haystack, needle, offset) {
 	var i = (haystack + '').indexOf(needle, (offset || 0));
