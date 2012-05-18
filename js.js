@@ -77,7 +77,6 @@ $(document).ready(function() {
 		return false;
 	});
 
-
 	$('.country').click(function() {
 		if ($(this).hasClass('show_country')) {
 			$(this).removeClass('show_country');
@@ -129,7 +128,7 @@ function format_tds() {
 			$(this).text(format($(this).text()));
 		}
 
-		if ($(this).attr('var')) {
+		if ($(this).attr('var') && !strpos($(this).text(), '(')) {
 			if (!$(this).hasClass('is_time')) {
 				var new_value = format(parseFloat($(this).attr('var')));
 				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
