@@ -123,41 +123,43 @@ function strpos (haystack, needle, offset) {
 
 function format_tds() {
 	$.each($('td'), function() {
-		var current_value = parseFloat($(this).text());
-		if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
-			$(this).text(format($(this).text()));
-		}
+		if (!strpos($(this).text(), '(')) {
+			var current_value = parseFloat($(this).text());
+			if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
+				$(this).text(format($(this).text()));
+			}
 
-		if ($(this).attr('var') && !strpos($(this).text(), '(')) {
-			if (!$(this).hasClass('is_time')) {
-				var new_value = format(parseFloat($(this).attr('var')));
-				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
+			if ($(this).attr('var')) {
+				if (!$(this).hasClass('is_time')) {
+					var new_value = format(parseFloat($(this).attr('var')));
+					var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
 
-				if (parseFloat($(this).attr('var')) > current_value) {
-					if ($(this).hasClass('inverse')) { // Para % de rebote
-						$(this).addClass('green');
+					if (parseFloat($(this).attr('var')) > current_value) {
+						if ($(this).hasClass('inverse')) { // Para % de rebote
+							$(this).addClass('green');
+						} else {
+							$(this).addClass('red');
+						}
+						$(this).attr('title', '-' + format(Math.abs(num)));
 					} else {
-						$(this).addClass('red');
+						if ($(this).hasClass('inverse')) { // Para % de rebote
+							$(this).addClass('red');
+						} else {
+							$(this).addClass('green');
+						}
+						$(this).attr('title', '+' + format(num));
 					}
-					$(this).attr('title', '-' + format(Math.abs(num)));
+					$(this).append(' <span>(' + new_value + ')</span>');
 				} else {
-					if ($(this).hasClass('inverse')) { // Para % de rebote
+					var new_value = $(this).attr('var');
+
+					if (strpos($(this).attr('title'), '-') === 0) {
 						$(this).addClass('red');
 					} else {
 						$(this).addClass('green');
 					}
-					$(this).attr('title', '+' + format(num));
+					$(this).append(' <span>(' + new_value + ')</span>');
 				}
-				$(this).append(' <span>(' + new_value + ')</span>');
-			} else {
-				var new_value = $(this).attr('var');
-
-				if (strpos($(this).attr('title'), '-') === 0) {
-					$(this).addClass('red');
-				} else {
-					$(this).addClass('green');
-				}
-				$(this).append(' <span>(' + new_value + ')</span>');
 			}
 		}
 	});
