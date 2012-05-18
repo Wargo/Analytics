@@ -37,46 +37,8 @@ $(document).ready(function() {
 	});
 
 	$('table.table').tablesorter({sortList: [[1,1]]});
-
-	$.each($('td'), function() {
-		var current_value = parseFloat($(this).text());
-		if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
-			$(this).text(format($(this).text()));
-		}
-
-		if ($(this).attr('var')) {
-			if (!$(this).hasClass('is_time')) {
-				var new_value = format(parseFloat($(this).attr('var')));
-				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
-
-				if (parseFloat($(this).attr('var')) > current_value) {
-					if ($(this).hasClass('inverse')) { // Para % de rebote
-						$(this).addClass('green');
-					} else {
-						$(this).addClass('red');
-					}
-					$(this).attr('title', '-' + format(Math.abs(num)));
-				} else {
-					if ($(this).hasClass('inverse')) { // Para % de rebote
-						$(this).addClass('red');
-					} else {
-						$(this).addClass('green');
-					}
-					$(this).attr('title', '+' + format(num));
-				}
-				$(this).append(' <span>(' + new_value + ')</span>');
-			} else {
-				var new_value = $(this).attr('var');
-
-				if (strpos($(this).attr('title'), '-') === 0) {
-					$(this).addClass('red');
-				} else {
-					$(this).addClass('green');
-				}
-				$(this).append(' <span>(' + new_value + ')</span>');
-			}
-		}
-	});
+	
+	format_tds();
 
 	$('.more-less').click(function() {
 		if ($(this).html() == '+') {
@@ -126,6 +88,7 @@ $(document).ready(function() {
 				$(element).addClass('hide_country');
 				$(element).closest('tr').after(data);
 				delete_countries();
+				format_tds();
 			});
 		} else {
 			$(this).removeClass('hide_country');
@@ -153,7 +116,51 @@ function format(s) {
 	s = s.replace('.', ',');
 	return s.replace(/(^\d{1,3}|\d{3})(?=(?:\d{3})+(?:$|\.))/g, '$1.');
 }
+
 function strpos (haystack, needle, offset) {
 	var i = (haystack + '').indexOf(needle, (offset || 0));
 	return i === -1 ? false : i;
+}
+
+function format_tds() {
+	$.each($('td'), function() {
+		var current_value = parseFloat($(this).text());
+		if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
+			$(this).text(format($(this).text()));
+		}
+
+		if ($(this).attr('var')) {
+			if (!$(this).hasClass('is_time')) {
+				var new_value = format(parseFloat($(this).attr('var')));
+				var num = Math.round(100 * (current_value - parseFloat($(this).attr('var')))) / 100;
+
+				if (parseFloat($(this).attr('var')) > current_value) {
+					if ($(this).hasClass('inverse')) { // Para % de rebote
+						$(this).addClass('green');
+					} else {
+						$(this).addClass('red');
+					}
+					$(this).attr('title', '-' + format(Math.abs(num)));
+				} else {
+					if ($(this).hasClass('inverse')) { // Para % de rebote
+						$(this).addClass('red');
+					} else {
+						$(this).addClass('green');
+					}
+					$(this).attr('title', '+' + format(num));
+				}
+				$(this).append(' <span>(' + new_value + ')</span>');
+			} else {
+				var new_value = $(this).attr('var');
+
+				if (strpos($(this).attr('title'), '-') === 0) {
+					$(this).addClass('red');
+				} else {
+					$(this).addClass('green');
+				}
+				$(this).append(' <span>(' + new_value + ')</span>');
+			}
+		}
+	});
+
 }

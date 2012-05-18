@@ -36,7 +36,7 @@ foreach($ga->getResults() as $result) {
 		<td><?php echo $result->getPageviews() ?></td>
 		<td><?php echo number_format($result->getPageviews() / $result->getVisits(), 2) ?></td>
 		<td><?php echo to_time($result->getAvgTimeOnSite()) ?></td>
-		<td><?php echo number_format($result->getVisitBounceRate(), 2) ?></td>
+		<td><?php echo number_format($result->getVisitBounceRate(), 2) ?> %</td>
 		<td><?php echo $result->getUniquePageviews() ?></td>
 		<td><?php echo $result->getNewVisits() ?></td>
 	</tr>
