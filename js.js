@@ -102,10 +102,19 @@ $(document).ready(function() {
 	});
 
 	$('.compare').click(function() {
-		$(this).remove();
+		$(this).hide();
 		$('.compare_fields').show();
+		$('.compare_fields').find('input').attr('disabled', false);
 		return false;
 	});
+
+	$('.remove_compare').click(function() {
+		$('.compare').show();
+		$('.compare_fields').hide();
+		$('.compare_fields').find('input').attr('disabled', true);
+		return false;
+	});
+
 
 	$('.country').click(function() {
 		if ($(this).hasClass('show_country')) {

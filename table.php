@@ -1,12 +1,4 @@
 <?php
-/*
-echo '<h4 class="change-date pull-right">';
-	echo 'Fecha: ' . strftime('%A %e %b %Y', strtotime($date_start)) . ' - ' . strftime('%A %e %b %Y', strtotime($date_end));
-	if($comparing) {
-		echo ' --- Comparando con: ' . strftime('%A %e %b %Y', strtotime($date_start_comp)) . ' - ' . strftime('%A %e %b %Y', strtotime($date_end_comp));
-	}
-echo '</h4>';
-*/
 if ($comparing) {
 	$hidden = '';
 } else {
@@ -16,12 +8,11 @@ if ($comparing) {
 echo '
 <div class="new_form pull-right">
 	<form class="form-inline" method="POST">';
-		if (!$comparing) {
-			echo '<a href="#" class="compare">Añadir fecha comparativa</a>';
-		}
+		echo '<a href="#" class="compare' . ($comparing?' hidden':'') . '">Añadir fecha comparativa</a>';
 		echo '<div class="compare_fields ' . $hidden . ' pull-left">
-			<input type="text" name="date_start_comp" class="input-small" id="dp3" value="' . $date_start_comp . '" />
-			<input type="text" name="date_end_comp" class="input-small" id="dp4" value="' . $date_end_comp . '" />
+			<i title="Eliminar fecha comparativa" class="remove_compare icon-ban-circle"></i>
+			<input ' . ($comparing?'':'disabled="disabled"') . ' type="text" name="date_start_comp" class="input-small" id="dp3" value="' . $date_start_comp . '" />
+			<input ' . ($comparing?'':'disabled="disabled"') . ' type="text" name="date_end_comp" class="input-small" id="dp4" value="' . $date_end_comp . '" />
 			-&nbsp;
 		</div>
 		<input type="hidden" name="queryType" value="' . $queryType . '" />

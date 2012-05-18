@@ -136,3 +136,7 @@ a.country {
 .preloader img {
 	width: 12px;
 }
+
+.remove_compare {
+	cursor: pointer;
+}
