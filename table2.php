@@ -121,7 +121,11 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 							break;
 						case 'pageVisitor':
 							echo '<td>' . number_format($ga->getUniquePageviews() / $ga->getVisits(), 2) . '</td>';
-							${$total} += number_format($ga->getUniquePageviews() / $ga->getVisits(), 2);
+							if ($ga->getVisits()) {
+								${$total} += number_format($ga->getUniquePageviews() / $ga->getVisits(), 2);
+							} else {
+								${$total} += 0;
+							}
 							break;
 						case 'avgTimeOnSite':
 							echo '<td>' . to_time($ga->getAvgTimeOnSite()) . '</td>';
