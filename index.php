@@ -58,6 +58,8 @@ if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 					include 'table.php';
 					break;
 				case 2:
+					$time = $_POST['time'];
+					$field = $_POST['field'];
 					include 'table2.php';
 					break;
 			}

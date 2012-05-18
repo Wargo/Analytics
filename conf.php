@@ -4,6 +4,17 @@ ini_set('display_errors', 1);
 
 setlocale(LC_ALL, 'es_ES.UTF8');
 
+$_fields = array(
+	'visits' => 'Visitas',
+	'visitors' => 'Visitantes',
+	'pageviews' => 'Páginas vistas',
+	'pageVisitor' => 'Páginas por visita',
+	'avgTimeOnSite' => 'Tiempo medio',
+	'visitBounceRate' => '% Rebote',
+	'uniquePageviews' => 'Páginas únicas vistas',
+	'newVisits' => 'Nuevos visitantes',
+);
+
 function debug($array) {
 	echo '<pre>';
 	print_r($array);
