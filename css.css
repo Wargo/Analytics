@@ -100,19 +100,21 @@ td span {
 }
 
 .red {
-	/*
-	color: #FF0000;
-	*/
 	background: url(images/down.png) no-repeat 3px 8px #FFE8E8;
 	padding-left: 20px !important;
 }
 
 .green {
-	/*
-	color: #00FF00;
-	*/
 	background: url(images/up.png) no-repeat 3px 8px #E8FFE8;
 	padding-left: 20px !important;
+}
+
+.inverse.red {
+	background: url(images/up_red.png) no-repeat 3px 8px #FFE8E8;
+}
+
+.inverse.green {
+	background: url(images/down_green.png) no-repeat 3px 8px #E8FFE8;
 }
 
 a.hide_country {
