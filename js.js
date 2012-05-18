@@ -108,13 +108,22 @@ $(document).ready(function() {
 	});
 
 	$('.country').click(function() {
-		var element = this;
-		$(this).append(' <img width="16" class="preloader" src="images/preloader.gif" />');
-		$.get(this.href, function(data) {
-			$('.preloader').remove();
-			$(element).closest('tr').after(data);
-			delete_countries();
-		});
+		if ($(this).hasClass('show_country')) {
+			$(this).removeClass('show_country');
+			var element = this;
+			$(this).append('<div class="preloader"><img src="images/preloader.gif" /></div>');
+			$.get(this.href, function(data) {
+				$('.preloader').remove();
+				$(element).addClass('hide_country');
+				$(element).closest('tr').after(data);
+				delete_countries();
+			});
+		} else {
+			$(this).removeClass('hide_country');
+			$(this).addClass('show_country');
+			var to_delete = 'countries_' + $(this).attr('var');
+			$('.' + to_delete).remove();
+		}
 		return false;
 	});
 

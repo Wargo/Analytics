@@ -115,7 +115,7 @@ echo '
 			$total_new_visits += $ga->getNewVisits();
 
 			echo '<tr>';
-				echo '<td class="first"><a class="country" href="countries.php?profile_id='.$profile_id.'&date_start='.$date_start.'&date_end='.$date_end.'">' . $_SESSION['accounts'][$profile_id] . '</a></td>';
+				echo '<td class="first"><a var="' . $profile_id . '" class="country show_country" href="countries.php?profile_id='.$profile_id.'&date_start='.$date_start.'&date_end='.$date_end.'">' . $_SESSION['accounts'][$profile_id] . '</a></td>';
 				echo '<td var="' . ($comparing?$_ga->getVisits():'') . '">' . $ga->getVisits() . '</td>';
 				echo '<td var="' . ($comparing?$_ga->getVisitors():'') . '">' . $ga->getVisitors() . '</td>';
 				echo '<td var="' . ($comparing?$_ga->getPageviews():'') . '">' . $ga->getPageviews() . '</td>';

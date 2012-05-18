@@ -29,8 +29,8 @@ $ga->requestReportData(
 <?php
 foreach($ga->getResults() as $result) {
 	?>
-	<tr class="countries">
-		<td><?php echo $result ?></td>
+	<tr class="countries_<?php echo $profile_id ?>">
+		<td class="first"><?php echo $result ?></td>
 		<td><?php echo $result->getVisits() ?></td>
 		<td><?php echo $result->getVisitors() ?></td>
 		<td><?php echo $result->getPageviews() ?></td>

@@ -114,3 +114,23 @@ td span {
 	background: url(images/up.png) no-repeat 3px 8px #E8FFE8;
 	padding-left: 20px !important;
 }
+
+a.hide_country {
+	background: url(images/arrow_up.png) no-repeat 0px 1px;
+}
+a.show_country {
+	background: url(images/arrow_down.png) no-repeat 0px 1px;
+}
+a.country {
+	position: relative;
+	padding-left: 20px;
+}
+
+.preloader {
+	position: absolute;
+	left: 0px;
+	top: 3px;
+}
+.preloader img {
+	width: 12px;
+}
