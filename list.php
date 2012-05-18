@@ -25,6 +25,7 @@ echo '<div class="container-fluid">';
 	echo '<form method="POST" action="" class="well">';
 		echo '<div class="row-fluid">';
 			echo '<div class="span9">';
+				echo '<h2>Listado de proyectos</h2>';
 				echo '<ul>';
 					foreach($accounts as $key => $value) {
 						echo '<li>';

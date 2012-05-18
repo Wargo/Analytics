@@ -47,22 +47,30 @@ echo '
 			$_total = $_total_visits = $_total_visitors = $_total_page_views = $_total_page_per_visit = $_total_time = $_total_bounce = $_total_unique_page_views = $_total_new_visits = 0;
 		}
 		foreach ($profiles_id as $profile_id) {
-			$total ++;
 			$filter = '';
 			$limit = 25;
 			$offset = 1;
 
-			$ga->requestReportData(
-				$profile_id,
-				array('country'), // campos (agrupar por...)
-				array('pageviews', 'visits', 'uniquePageviews', 'newVisits', 'timeOnSite', 'visitors', 'visitBounceRate', 'avgTimeOnSite'), // ,'bounce', 'entranceBounceRate'), // datos
-				'-visits', // orden
-				$filter, // condiciones
-				$date_start, // fecha inicio
-				$date_end, // fecha final
-				$offset, // desde
-				$limit // límite
-			);
+			try {
+				$ga->requestReportData(
+					$profile_id,
+					array('country'), // campos (agrupar por...)
+					array('pageviews', 'visits', 'uniquePageviews', 'newVisits', 'timeOnSite', 'visitors', 'visitBounceRate', 'avgTimeOnSite'), // ,'bounce', 'entranceBounceRate'), // datos
+					'-visits', // orden
+					$filter, // condiciones
+					$date_start, // fecha inicio
+					$date_end, // fecha final
+					$offset, // desde
+					$limit // límite
+				);
+			} catch(Exception $e) {
+				$_SESSION['error'] = array(
+					'title' => 'Error!',
+					'content' => $e->getMessage(),
+				);
+				echo '<meta http-equiv="refresh" content="0; url=index.php">';
+				die;
+			}
 
 			if ($comparing) {
 				$_ga = new gapi($_SESSION['user'], $_SESSION['pass']);
@@ -92,6 +100,9 @@ echo '
 				$_total_new_visits += $_ga->getNewVisits();
 			}
 
+			if ($ga->getVisits()) {
+				$total ++;
+			}
 			$total_visits += $ga->getVisits();
 			$total_visitors += $ga->getVisitors();
 			$total_page_views += $ga->getPageviews();

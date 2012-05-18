@@ -1,5 +1,4 @@
 <div class="login">
-	<?php include 'alert.php'; ?>
 	<form class="form-horizontal" method="POST" action="">
 		<fieldset>
 			<legend>Autentifícate con tu cuenta de Google</legend>

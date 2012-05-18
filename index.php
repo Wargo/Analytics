@@ -34,6 +34,7 @@ if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 	</head>
 	<body>
 		<?php
+		include 'alert.php';
 		if (!empty($_POST['profile_id'])) {
 			$date_start = $_POST['date_start'];
 			$date_end = $_POST['date_end'];
