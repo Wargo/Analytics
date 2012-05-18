@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 	$('table.table').tablesorter({sortList: [[1,1]]});
 	
-	format_tds();
+	format_tds(true);
 
 	$('.more-less').click(function() {
 		if ($(this).html() == '+') {
@@ -87,7 +87,7 @@ $(document).ready(function() {
 				$(element).addClass('hide_country');
 				$(element).closest('tr').after(data);
 				delete_countries();
-				format_tds();
+				format_tds(false);
 			});
 		} else {
 			$(this).removeClass('hide_country');
@@ -121,9 +121,9 @@ function strpos (haystack, needle, offset) {
 	return i === -1 ? false : i;
 }
 
-function format_tds() {
+function format_tds(checkit) {
 	$.each($('td'), function() {
-		if (!strpos($(this).text(), '(')) {
+		if (checkit || $(this).parent('tr').hasClass('country_row')) {
 			var current_value = parseFloat($(this).text());
 			if (!$(this).hasClass('is_time') && !$(this).hasClass('first')) {
 				$(this).text(format($(this).text()));
