@@ -7,7 +7,14 @@ if (!empty($_POST['google_email']) && !empty($_POST['google_password'])) {
 	$_SESSION['pass'] = $_POST['google_password'];
 }
 if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
-	$ga = new gapi($_SESSION['user'], $_SESSION['pass']);
+	try {
+		$ga = new gapi($_SESSION['user'], $_SESSION['pass']);
+	} catch(Exception $e) {
+		$ga = null;
+		$_SESSION['user'] = $_POST['google_email'] = null;
+		$_SESSION['pass'] = $_POST['google_password'] = null;
+		$_SESSION['error'] = array('title' => 'Error de autentificación!', 'content' => 'El email o la contraseña no son correctos');;
+	}
 } else {
 	$_POST['profile_id'] = null;
 }

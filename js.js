@@ -136,6 +136,10 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.close').click(function() {
+		$(this).parent('div').fadeOut();
+	});
+
 });
 
 function delete_countries() {
