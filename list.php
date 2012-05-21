@@ -65,7 +65,7 @@ echo '<div class="container-fluid">';
 						}
 					echo '</select>';
 						echo '<select name="time" class="input-large clearfix">';
-							echo '<option disabled="disabled" value="daily">Diariamente</option>';
+							echo '<option value="daily">Diariamente</option>';
 							echo '<option disabled="disabled" value="weekly">Semanalmente</option>';
 							echo '<option value="monthly">Mensualmente</option>';
 							echo '<option disabled="disabled" value="yearly">Anualmente</option>';

@@ -15,7 +15,7 @@ echo '
 		echo '</select>
 
 		<select name="time" class="input-large clearfix">
-			<option disabled="disabled" value="daily">Diariamente</option>
+			<option value="daily">Diariamente</option>
 			<option disabled="disabled" value="weekly">Semanalmente</option>
 			<option value="monthly">Mensualmente</option>
 			<option disabled="disabled" value="yearly">Anualmente</option>
@@ -32,20 +32,36 @@ echo '
 </div>
 ';
 
-$start = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2), 1, substr($date_start, 0, 4)));
-$end = date('Y-m-d', mktime(0, 0, 0, substr($date_end, 5, 2), 1, substr($date_end, 0, 4)));
-
-$start2 = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + 1, 0, substr($date_start, 0, 4)));
-
-$segments[] = array('start' => $start, 'end' => $start2);
-
-for ($i = 1; $i <= 100; $i ++) {
-	$aux = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + $i, 1, substr($date_start, 0, 4)));
-	$aux2 = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + $i + 1, 0, substr($date_start, 0, 4)));
-	$segments[] = array('start' => $aux, 'end' => $aux2);
-	if ($aux == $end) {
+switch ($time) {
+	case 'daily':
+		$start = $date_start;
+		$end = $date_end;
+		$segments[] = array('start' => $start, 'end' => $start);
+		for ($i = 1; $i <= 1000; $i ++) {
+			$aux = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2), substr($date_start, 8, 2) + $i, substr($date_start, 0, 4)));
+			$segments[] = array('start' => $aux, 'end' => $aux);
+			if ($aux == $end) {
+				break;
+			}
+		}
 		break;
-	}
+	case 'monthly':
+		$start = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2), 1, substr($date_start, 0, 4)));
+		$end = date('Y-m-d', mktime(0, 0, 0, substr($date_end, 5, 2), 1, substr($date_end, 0, 4)));
+
+		$start2 = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + 1, 0, substr($date_start, 0, 4)));
+
+		$segments[] = array('start' => $start, 'end' => $start2);
+
+		for ($i = 1; $i <= 100; $i ++) {
+			$aux = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + $i, 1, substr($date_start, 0, 4)));
+			$aux2 = date('Y-m-d', mktime(0, 0, 0, substr($date_start, 5, 2) + $i + 1, 0, substr($date_start, 0, 4)));
+			$segments[] = array('start' => $aux, 'end' => $aux2);
+			if ($aux == $end) {
+				break;
+			}
+		}
+		break;
 }
 
 if ($field != 'pageVisitor') {
@@ -64,7 +80,14 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 			<th>Web</th>
 			<?php
 			foreach ($segments as $segment) {
-				echo '<th>' . strftime('%B', strtotime($segment['start'])) . '</th>';
+				switch ($time) {
+					case 'daily':
+						echo '<th>' . strftime('%A %d', strtotime($segment['start'])) . '</th>';
+						break;
+					case 'monthly':
+						echo '<th>' . strftime('%B', strtotime($segment['start'])) . '</th>';
+						break;
+				}
 			}
 			?>
 		</tr>
