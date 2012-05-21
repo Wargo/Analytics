@@ -30,11 +30,13 @@ if (!empty($_SESSION['user']) && !empty($_SESSION['pass'])) {
 		<script src="js.js"></script>
 		<script src="jquery.tablesorter.min.js"></script>
 		<script src="bootstrap/docs/assets/js/bootstrap-datepicker.js"></script>
+		<script src="bootstrap/docs/assets/js/bootstrap-modal.js"></script>
 		<title>Analytics</title>
 	</head>
 	<body>
 		<?php
 		include 'alert.php';
+		include 'modal.php';
 		if (!empty($_POST['profile_id'])) {
 			$date_start = $_POST['date_start'];
 			$date_end = $_POST['date_end'];

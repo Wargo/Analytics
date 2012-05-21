@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+	/*
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false,
+		show: false
+	});
+	*/
+
 	$('.account').click(function() {
 		if ($(this).attr('checked')) {
 			$('.account_' + $(this).attr('id')).attr('checked', true);
@@ -22,13 +30,27 @@ $(document).ready(function() {
 
 	$('.calculate').click(function() {
 		var ret = false;
-		$.each($('input[type="checkbox"]'), function() {
+		var count = 0;
+		$.each($('input[type="checkbox"].row_web'), function() {
 			if (this.checked) {
 				ret = true;
+				count ++;
 			}
 		});
 
 		if (ret) {
+			var secs = count * 1;
+			var time = (secs / 20) * 1000;
+			$('#myModal').modal({
+				backdrop: 'static',
+				keyboard: false
+				//show: false
+			});
+			var current = 0;
+			setInterval(function() {
+				current = current + 5;
+				$('.bar').attr('style', 'width: ' + current + '%');
+			}, time);
 			return true;
 		} else {
 			alert('No has seleccionado ninguna web');

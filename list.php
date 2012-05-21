@@ -39,7 +39,7 @@ echo '<div class="container-fluid">';
 								foreach ($value['webs'] as $web) {
 									echo '<li>';
 										echo '<label for="' . $web['profileId'] . '" class="checkbox">';
-										echo '<input class="account_' . $key . '" type="checkbox" name="profile_id[]" value="' . $web['profileId'] . '" id="' . $web['profileId'] . '" />';
+										echo '<input class="row_web account_' . $key . '" type="checkbox" name="profile_id[]" value="' . $web['profileId'] . '" id="' . $web['profileId'] . '" />';
 										echo $web['title']. '</label>';
 									echo '</li>';
 								}
@@ -71,6 +71,7 @@ echo '<div class="container-fluid">';
 							echo '<option disabled="disabled" value="yearly">Anualmente</option>';
 						echo '</select>';
 					echo '</div>';
+					//echo '<button class="btn btn-primary calculate" data-toggle="modal" data-target="#myModal" type="submit">Calcular</button> ';
 					echo '<button class="btn btn-primary calculate" type="submit">Calcular</button> ';
 					echo '<button class="btn btn-danger btn-mini remove_checks">Quitar todos los checks</button>';
 				echo '</div>';
