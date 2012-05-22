@@ -148,35 +148,35 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 							break;
 						case 'visitors':
 							echo '<td>' . $ga->getVisitors() . '</td>';
-							${$total} += $ga->getVisitors();
+							${$total} += $values[$count - 1][] = $ga->getVisitors();
 							break;
 						case 'pageviews':
 							echo '<td>' . $ga->getPageviews() . '</td>';
-							${$total} += $ga->getPageviews();
+							${$total} += $values[$count - 1][] = $ga->getPageviews();
 							break;
 						case 'pageVisitor':
 							echo '<td>' . number_format($ga->getUniquePageviews() / $ga->getVisits(), 2) . '</td>';
 							if ($ga->getVisits()) {
-								${$total} += number_format($ga->getUniquePageviews() / $ga->getVisits(), 2);
+								${$total} += $values[$count - 1][] = number_format($ga->getUniquePageviews() / $ga->getVisits(), 2);
 							} else {
 								${$total} += 0;
 							}
 							break;
 						case 'avgTimeOnSite':
 							echo '<td>' . to_time($ga->getAvgTimeOnSite()) . '</td>';
-							${$total} += $ga->getAvgTimeOnSite();
+							${$total} += $values[$count - 1][] = $ga->getAvgTimeOnSite();
 							break;
 						case 'visitBounceRate':
 							echo '<td>' . number_format($ga->getVisitBounceRate(), 2) . '</td>';
-							${$total} += number_format($ga->getVisitBounceRate(), 2);
+							${$total} += $values[$count - 1][] = number_format($ga->getVisitBounceRate(), 2);
 							break;
 						case 'uniquePageviews':
 							echo '<td>' . $ga->getUniquePageviews() . '</td>';
-							${$total} += $ga->getUniquePageviews();
+							${$total} += $values[$count - 1][] = $ga->getUniquePageviews();
 							break;
 						case 'newVisits':
 							echo '<td>' . $ga->getNewVisits() . '</td>';
-							${$total} += $ga->getNewVisits();
+							${$total} += $values[$count - 1][] = $ga->getNewVisits();
 							break;
 					}
 				}
@@ -238,7 +238,7 @@ $chart = substr($chart, 0, -1);
 		]);
 
 		var options = {
-			title: 'Gráfica comparativa'
+			title: '<?php echo $_fields[$_POST['field']]; ?>'
 			//hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}}
 		};
 
@@ -249,8 +249,7 @@ $chart = substr($chart, 0, -1);
 		chart.draw(data, options);
 
 		var options = {
-			title: 'Gráfica sólo de la primera web',
-			hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}},
+			title: '<?php echo $_fields[$_POST['field']]; ?>  sólo de la primera web',
 			is3D:true
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('chart_div_pie'));
