@@ -39,7 +39,7 @@ $(document).ready(function() {
 		});
 
 		if (ret) {
-			var secs = count * 1;
+			var secs = count * 2;
 			var time = (secs / 20) * 1000;
 			$('#myModal').modal({
 				backdrop: 'static',
