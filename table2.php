@@ -32,6 +32,16 @@ echo '
 </div>
 ';
 
+$chart = '[\'Fecha\',';
+
+foreach($profiles_id as $profile_id) {
+	$chart .= '\'' . $_SESSION['accounts'][$profile_id] . '\',';
+}
+
+$chart = substr($chart, 0, -1) . '],
+';
+$values = $dates = array();
+
 switch ($time) {
 	case 'daily':
 		$start = $date_start;
@@ -83,9 +93,11 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 				switch ($time) {
 					case 'daily':
 						echo '<th>' . strftime('%A %d', strtotime($segment['start'])) . '</th>';
+						$dates[] = strftime('%A %d', strtotime($segment['start']));
 						break;
 					case 'monthly':
 						echo '<th>' . strftime('%B', strtotime($segment['start'])) . '</th>';
+						$dates[] = strftime('%B', strtotime($segment['start']));
 						break;
 				}
 			}
@@ -132,7 +144,7 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 					switch ($field) {
 						case 'visits':
 							echo '<td>' . $ga->getVisits() . '</td>';
-							${$total} += $ga->getVisits();
+							${$total} += $values[$count - 1][] = $ga->getVisits();
 							break;
 						case 'visitors':
 							echo '<td>' . $ga->getVisitors() . '</td>';
@@ -194,3 +206,44 @@ echo '<a class="pull-left btn btn-inverse" href="index.php">Volver</a>';
 		</tr>
 	</tfoot>
 </table>
+
+<?php
+foreach ($dates as $key => $value) {
+	$chart .= '[\'' . $value . '\',';
+	foreach ($values[$key] as $v) {
+		$chart .= $v . ',';
+	}
+	$chart = substr($chart, 0, -1);
+	$chart .= '],
+';
+}
+
+$chart = substr($chart, 0, -1);
+?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("visualization", "1", {packages:["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+			<?php
+			echo $chart;
+			?>
+			//['Fecha', 'web1', 'web2'],
+			//['2004', 1000, 400],
+			//['2005', 1170, 460],
+			//['2006', 660, 920],
+			//['2007', 1030, 540]
+		]);
+
+		var options = {
+			title: 'Gráfica comparativa',
+			hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}}
+		};
+
+		var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
+	}
+</script>
+<div id="chart_div" style="width: 100%; height: 500px;"></div>
