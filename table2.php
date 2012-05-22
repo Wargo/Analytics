@@ -242,7 +242,8 @@ $chart = substr($chart, 0, -1);
 			hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}}
 		};
 
-		var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+		//var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 		chart.draw(data, options);
 	}
 </script>
