@@ -238,13 +238,25 @@ $chart = substr($chart, 0, -1);
 		]);
 
 		var options = {
-			title: 'Gráfica comparativa',
-			hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}}
+			title: 'Gráfica comparativa'
+			//hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}}
 		};
 
 		//var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div_line'));
+		chart.draw(data, options);
+		var chart = new google.visualization.AreaChart(document.getElementById('chart_div_area'));
+		chart.draw(data, options);
+
+		var options = {
+			title: 'Gráfica sólo de la primera web',
+			hAxis: {title: 'Fecha',  titleTextStyle: {color: 'red'}},
+			is3D:true
+		};
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div_pie'));
 		chart.draw(data, options);
 	}
 </script>
-<div id="chart_div" style="width: 100%; height: 500px;"></div>
+<div id="chart_div_line" style="width: 100%; height: 500px;"></div>
+<div id="chart_div_area" style="width: 100%; height: 500px;"></div>
+<div id="chart_div_pie" style="width: 100%; height: 500px;"></div>
