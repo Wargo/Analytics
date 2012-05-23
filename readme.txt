@@ -9,10 +9,10 @@ Mostrar un tipo de dato (visitas, páginas, etc...) por bloque temporal (mensual
 Añadido desplegar cada web para ver todos los países en rangos comparativos
 Añadido nuevo bloqe temporal (diario)
 Añadida una carga progresiva (loader)
+Añadidas gráficas sólo para el sector comparativo por tiempo
+Terminadas de ajustar las barras de progreso
 
-----
+---- FUTURAS ACCIONES ----
 
-Terminar de ajustar las barras de progreso
 Añadir en el filtro el campo país
-Añadir gráficas
 Posibilidad de hacer comparativas según áreas, no según webs
