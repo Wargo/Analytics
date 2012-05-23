@@ -27,7 +27,7 @@ echo '
 		foreach($profiles_id as $profile_id) {
 			echo '<input type="hidden" name="profile_id[]" value="' . $profile_id. '" />';
 		}
-		echo ' <input type="submit" class="btn btn-primary" value="Calcular" />
+		echo ' <input type="submit" class="btn btn-primary calculate2" count="' . count($profiles_id) . '" multiplier="4" value="Calcular" />
 	</form>
 </div>
 ';
@@ -247,9 +247,11 @@ $chart = substr($chart, 0, -1);
 		chart.draw(data, options);
 		var chart = new google.visualization.AreaChart(document.getElementById('chart_div_area'));
 		chart.draw(data, options);
+		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_column'));
+		chart.draw(data, options);
 
 		var options = {
-			title: '<?php echo $_fields[$_POST['field']]; ?>  sólo de la primera web',
+			title: '<?php echo $_fields[$_POST['field']]; ?> sólo de la primera web',
 			is3D:true
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('chart_div_pie'));
@@ -257,5 +259,6 @@ $chart = substr($chart, 0, -1);
 	}
 </script>
 <div id="chart_div_line" style="width: 100%; height: 500px;"></div>
+<div id="chart_div_column" style="width: 100%; height: 500px;"></div>
 <div id="chart_div_area" style="width: 100%; height: 500px;"></div>
 <div id="chart_div_pie" style="width: 100%; height: 500px;"></div>

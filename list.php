@@ -72,7 +72,7 @@ echo '<div class="container-fluid">';
 						echo '</select>';
 					echo '</div>';
 					//echo '<button class="btn btn-primary calculate" data-toggle="modal" data-target="#myModal" type="submit">Calcular</button> ';
-					echo '<button class="btn btn-primary calculate" type="submit">Calcular</button> ';
+					echo '<button class="btn btn-primary calculate" multiplier="2" type="submit">Calcular</button> ';
 					echo '<button class="btn btn-danger btn-mini remove_checks">Quitar todos los checks</button>';
 				echo '</div>';
 			echo '</div>';

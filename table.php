@@ -8,7 +8,7 @@ if ($comparing) {
 echo '
 <div class="new_form pull-right">
 	<form class="form-inline" method="POST">';
-		echo '<a href="#" class="compare' . ($comparing?' hidden':'') . '">Añadir fecha comparativa</a>';
+		echo '<a href="#" class="compare' . ($comparing?' hidden':'') . '">Añadir fecha comparativa</a> ';
 		echo '<div class="compare_fields ' . $hidden . ' pull-left">
 			<i title="Eliminar fecha comparativa" class="remove_compare icon-ban-circle"></i>
 			<input ' . ($comparing?'':'disabled="disabled"') . ' type="text" name="date_start_comp" class="input-small" id="dp3" value="' . $date_start_comp . '" />
@@ -21,7 +21,7 @@ echo '
 		foreach($profiles_id as $profile_id) {
 			echo '<input type="hidden" name="profile_id[]" value="' . $profile_id. '" />';
 		}
-		echo ' <input type="submit" class="btn btn-primary" value="Calcular" />
+		echo ' <input type="submit" class="btn btn-primary calculate2" count="' . count($profiles_id) . '" multiplier="' . ($comparing?4:2) . '" value="Calcular" />
 	</form>
 </div>
 ';

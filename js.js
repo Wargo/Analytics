@@ -28,6 +28,10 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.calculate2').click(function() {
+		loading($(this).attr('count'), $(this).attr('multiplier'));
+	});
+
 	$('.calculate').click(function() {
 		var ret = false;
 		var count = 0;
@@ -39,18 +43,7 @@ $(document).ready(function() {
 		});
 
 		if (ret) {
-			var secs = count * 2;
-			var time = (secs / 20) * 1000;
-			$('#myModal').modal({
-				backdrop: 'static',
-				keyboard: false
-				//show: false
-			});
-			var current = 0;
-			setInterval(function() {
-				current = current + 5;
-				$('.bar').attr('style', 'width: ' + current + '%');
-			}, time);
+			loading(count, $(this).attr('multiplier'));
 			return true;
 		} else {
 			alert('No has seleccionado ninguna web');
@@ -79,14 +72,17 @@ $(document).ready(function() {
 
 	$('.queryType').change(function() {
 		if ($(this).val() == 2) {
+			$('.calculate').attr('multiplier', 4);
 			$('.more_options').show();
 		} else {
+			$('.calculate').attr('multiplier', 2);
 			$('.more_options').hide();
 		}
 	});
 
 	$('.compare').click(function() {
 		$(this).hide();
+		$('.calculate2').attr('multiplier', 4);
 		$('.compare_fields').show();
 		$('.compare_fields').find('input').attr('disabled', false);
 		return false;
@@ -95,6 +91,7 @@ $(document).ready(function() {
 	$('.remove_compare').click(function() {
 		$('.compare').show();
 		$('.compare_fields').hide();
+		$('.calculate2').attr('multiplier', 2);
 		$('.compare_fields').find('input').attr('disabled', true);
 		return false;
 	});
@@ -141,6 +138,21 @@ function format(s) {
 function strpos (haystack, needle, offset) {
 	var i = (haystack + '').indexOf(needle, (offset || 0));
 	return i === -1 ? false : i;
+}
+
+function loading(count, multiplier) {
+	var secs = count * multiplier;
+	var time = (secs / 100) * 1000;
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false
+		//show: false
+	});
+	var current = 0;
+	setInterval(function() {
+		current = current + 1;
+		$('.bar').attr('style', 'width: ' + current + '%');
+	}, time);
 }
 
 function format_tds(checkit) {
