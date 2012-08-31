@@ -32,6 +32,7 @@ class gapi
 	//const account_data_url = 'https://www.google.com/analytics/feeds/accounts/default';
 	//const report_data_url = 'https://www.google.com/analytics/feeds/data';
 	const account_data_url = 'https://www.googleapis.com/analytics/v2.4/management/accounts/~all/webproperties/~all/profiles';
+	const account_data_url_general = 'https://www.googleapis.com/analytics/v2.4/management/accounts';
 	const report_data_url = 'https://www.googleapis.com/analytics/v2.4/data';
 	const interface_name = 'GAPI-1.3';
 	const dev_mode = false;
@@ -84,10 +85,11 @@ class gapi
 	public function requestAccountData($start_index=1, $max_results=20)
 	{
 		$response = $this->httpRequest(gapi::account_data_url, array('start-index'=>$start_index,'max-results'=>$max_results), null, $this->generateAuthHeader());
+		$response2 = $this->httpRequest(gapi::account_data_url_general, array('start-index'=>$start_index,'max-results'=>$max_results), null, $this->generateAuthHeader());
 
 		if(substr($response['code'],0,1) == '2')
 		{
-			return $this->accountObjectMapper($response['body']);
+			return $this->accountObjectMapper($response['body'], $response2['body']);
 		}
 		else 
 		{
@@ -254,9 +256,18 @@ class gapi
 	 * @param String $xml_string
 	 * @return Array of gapiAccountEntry objects
 	 */
-	protected function accountObjectMapper($xml_string)
+	protected function accountObjectMapper($xml_string, $accounts)
 	{
 		$xml = simplexml_load_string($xml_string);
+		$accounts = simplexml_load_string($accounts);
+
+		$array_accounts = array();
+		foreach ($accounts->entry as $account) {
+			$id = explode('/', $account->id);
+			$id = $id[count($id) - 1];
+			$title = trim(str_replace('Google Analytics Account', '', $account->title));
+			$array_accounts[$id] = $title;
+		}
 
 		$this->results = null;
 
@@ -293,6 +304,7 @@ class gapi
 
 			$properties['title'] = strval($entry->title);
 			$properties['updated'] = strval($entry->updated);
+			$properties['accountName'] = $array_accounts[$properties['accountId']];
 
 			$results[] = new gapiAccountEntry($properties);
 		}

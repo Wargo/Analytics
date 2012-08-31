@@ -8,8 +8,8 @@ foreach ($results as $result) {
 	$_SESSION['accounts'][$result->getProfileId()] = $aux[$i]['title'] = $result->getProfileName();
 	$aux[$i]['profileId'] = $result->getProfileId();
 	$aux[$i]['accountId'] = $result->getAccountId();
-	//$aux[$i]['accountName'] = $result->getAccountName(); // TODO no sé obtener el account name
-	$aux[$i]['accountName'] = $result->getAccountId();
+	$aux[$i]['accountName'] = $result->getAccountName(); // TODO no sé obtener el account name
+	//$aux[$i]['accountName'] = $result->getAccountId();
 	$i ++;
 }
 

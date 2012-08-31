@@ -82,8 +82,9 @@ th.headerSortDown {
 
 .more-less {
 	cursor: pointer;
-	width: 30px;
+	width: 10px;
 	float: left;
+	margin-right:20px;
 }
 
 .change-date {
