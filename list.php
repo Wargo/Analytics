@@ -4,12 +4,13 @@ $results = $ga->getResults();
 $aux = array();
 $i = 0;
 foreach ($results as $result) {
-	$aux[$i]['title'] = $result->getTitle();
+	//$_SESSION['accounts'][$result->getProfileId()] = $aux[$i]['title'] = $result->getTitle();
+	$_SESSION['accounts'][$result->getProfileId()] = $aux[$i]['title'] = $result->getProfileName();
 	$aux[$i]['profileId'] = $result->getProfileId();
 	$aux[$i]['accountId'] = $result->getAccountId();
-	$aux[$i]['accountName'] = $result->getAccountName();
+	//$aux[$i]['accountName'] = $result->getAccountName(); // TODO no sé obtener el account name
+	$aux[$i]['accountName'] = $result->getAccountId();
 	$i ++;
-	$_SESSION['accounts'][$result->getProfileId()] = $result->getTitle();
 }
 
 $accounts = array();
