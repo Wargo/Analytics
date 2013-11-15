@@ -74,9 +74,19 @@ $(document).ready(function() {
 		if ($(this).val() == 2) {
 			$('.calculate').attr('multiplier', 4);
 			$('.more_options').show();
+			$('form.well').attr('action', '');
+		} else if ($(this).val() == 3) {
+			$('form.well').attr('action', 'pdf.php');
+			$('.calculate').attr('multiplier', 2);
+			$('.more_options').hide();
+		} else if ($(this).val() == 4) {
+			$('form.well').attr('action', 'pdf.php');
+			$('.calculate').attr('multiplier', 5);
+			$('.more_options').hide();
 		} else {
 			$('.calculate').attr('multiplier', 2);
 			$('.more_options').hide();
+			$('form.well').attr('action', '');
 		}
 	});
 
